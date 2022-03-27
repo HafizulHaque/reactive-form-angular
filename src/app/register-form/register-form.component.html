@@ -4,27 +4,52 @@
   <form 
     [formGroup]="registerForm"
     (ngSubmit)="onSubmit()"
-    class="w-25 border rounded-2 shadow-lg p-3">
+    class="w-25 border border-success rounded-2 shadow-lg p-3">
+
     <!-- form-header  -->
     <div class="h4 text-center text-danger py-3 border-bottom">Register Form</div>
-    <!-- user name control  -->
-    <div class="form-group my-3">
-      <label for="userName" class="form-label">Username</label>
-      <input 
-        type="text" 
-        id="userName" 
-        class="form-control"
-        formControlName="userName">
-    </div>
-    <!-- user email control  -->
-    <div class="form-group my-3">
-      <label for="userEmail" class="form-label">E-mail</label>
-      <input 
-        type="email" 
-        id="userEmail" 
-        class="form-control"
-        formControlName="userEmail">
-    </div>
+
+    <!-- user data form group control  -->
+    <div formGroupName="userData">
+
+      <!-- user name control  -->
+      <div class="form-group my-3">
+        <label for="userName" class="form-label">Username</label>
+        <input 
+          type="text" 
+          id="userName" 
+          class="form-control"
+          formControlName="userName">
+          <!-- error message for username  -->
+          <span
+            *ngIf="
+              registerForm.get('userData.userName')?.touched && 
+              registerForm.get('userData.userName')?.invalid"
+            class="form-text text-danger">
+            Enter a valid username!
+          </span>
+      </div>
+
+      <!-- user email control  -->
+      <div class="form-group my-3">
+        <label for="userEmail" class="form-label">E-mail</label>
+        <input 
+          type="email" 
+          id="userEmail" 
+          class="form-control"
+          formControlName="userEmail">
+          <!-- error message for email  -->
+          <span 
+            *ngIf="
+              registerForm.get('userData.userEmail')?.touched && 
+              registerForm.get('userData.userEmail')?.invalid"
+            class="form-text text-danger">
+            Enter a valid email address
+          </span>
+      </div>
+
+    </div><!--userData form control group ends-->
+
     <!-- user gender control  -->
     <div class="form-group my-3">
       <label class="d-block form-label">Gender</label>
@@ -42,9 +67,15 @@
         </label>
       </div>
     </div>
+
     <!-- submit button  -->
     <div class="d-grid my-3">
-      <input type="submit" class="btn btn-success" value="Register">
+      <input 
+        type="submit" 
+        class="btn btn-success" 
+        value="Register"
+        [disabled]="registerForm.invalid">
     </div>
+
   </form>
 </div>
