@@ -10,6 +10,8 @@ export class RegisterFormComponent implements OnInit {
 
   registerForm !: FormGroup;
 
+  forbiddenNames=['anna', 'nemo', 'nymeria'];
+
   genders: string[] = ['male', 'female', 'other'];
 
   constructor() { }
@@ -17,7 +19,7 @@ export class RegisterFormComponent implements OnInit {
   ngOnInit(): void {
     this.registerForm = new FormGroup({
       'userData': new FormGroup({
-        'userName': new FormControl(null, Validators.required),
+        'userName': new FormControl(null, [Validators.required, Validators.minLength(8), this.validateForbiddenNames.bind(this)]),
         'userEmail': new FormControl(null, [Validators.required, Validators.email])
       }),
       'userGender': new FormControl('male'),
@@ -42,8 +44,20 @@ export class RegisterFormComponent implements OnInit {
     return (<FormArray>this.registerForm.get('hobbies')).controls;
   }
 
+  getUserDataControl(): any {
+    return (<FormGroup>this.registerForm.get('userData')).controls;
+  }
+
   validateGradAfterBirthday(gradControl: FormControl): {[key: string]: any} | null {
     return null;
   }
 
+  validateForbiddenNames(control: FormControl): {[key: string]: boolean} | null {
+    if(this.forbiddenNames.indexOf(control.value) !== -1){
+      //found match with the forbidden names
+      return {'forbiddenName': true};
+    }
+    //no forbidden name match - return valid 
+    return null;
+  }
 }

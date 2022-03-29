@@ -13,7 +13,7 @@
     <div formGroupName="userData">
 
       <!-- user name control  -->
-      <div class="form-group my-3">
+      <div class="form-group my-2">
         <label for="userName" class="form-label">Username</label>
         <input 
           type="text" 
@@ -26,12 +26,12 @@
               registerForm.get('userData.userName')?.touched && 
               registerForm.get('userData.userName')?.invalid"
             class="form-text text-danger">
-            Enter a valid username!
+            <span class="d-block" *ngIf="true">Enter a username</span>
           </span>
       </div>
 
       <!-- user email control  -->
-      <div class="form-group my-3">
+      <div class="form-group my-2">
         <label for="userEmail" class="form-label">E-mail</label>
         <input 
           type="email" 
@@ -51,7 +51,7 @@
     </div><!--userData form control group ends-->
 
     <!-- user gender control  -->
-    <div class="form-group my-3">
+    <div class="form-group my-2">
       <label class="d-block form-label">Gender</label>
       <div 
         *ngFor="let gender of genders"
@@ -69,7 +69,7 @@
     </div>
 
     <!-- user birthday input control  -->
-    <div class="form-group my-3">
+    <div class="form-group my-2">
       <label for="userBirthday" class="form-label">Birthday</label>
       <input 
         type="date" 
@@ -79,7 +79,7 @@
     </div>
 
     <!-- user graduation input control  -->
-    <div class="form-group my-3">
+    <div class="form-group my-2">
       <label for="userGradYear" class="form-label">Graduation Date</label>
       <input 
         type="date" 
@@ -89,7 +89,7 @@
     </div>
 
     <!-- user hobby add control  -->
-    <div class="form-group my-3" formArrayName="hobbies">
+    <div class="form-group my-2" formArrayName="hobbies">
 
       <button class="btn btn-primary" type="button" (click)="onAddHobby()">Add Hobby</button>
       <!-- hobby name input  -->
@@ -101,12 +101,12 @@
     </div>
 
     <!-- submit button  -->
-    <div class="d-grid my-3">
+    <div class="d-grid my-2">
       <input 
         type="submit" 
         class="btn btn-success" 
-        value="Register"
-        [disabled]="registerForm.invalid">
+        value="Register">
+        <!-- [disabled]="registerForm.invalid"> -->
     </div>
 
   </form>
