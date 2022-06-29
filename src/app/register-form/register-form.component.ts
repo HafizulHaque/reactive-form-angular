@@ -45,7 +45,7 @@ export class RegisterFormComponent implements OnInit {
   }
 
   getUserDataControl(): any {
-    return (<FormGroup>this.registerForm.get('userData')).controls;
+    return (<FormControl>(<FormGroup>this.registerForm.get('userData')).get('userName'));
   }
 
   validateGradAfterBirthday(gradControl: FormControl): {[key: string]: any} | null {
